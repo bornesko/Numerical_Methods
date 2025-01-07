@@ -5,7 +5,7 @@ program main_program
 implicit none
 
 !Variables
-real, allocatable:: x(:), Z_r(:), y(:), z_s(:) 	!Variables for X and fx, that should be read from a .txt file
+real, allocatable:: x(:), z_r(:), y(:), z_s(:) 	!Variables for X and fx, that should be read from a .txt file
 integer n										!Number of Points (first line of the .txt file)
 integer i										!Loop Variable
 
@@ -15,9 +15,9 @@ read(10,*)		!Skipping the headings "x" and "fx" in the .txt file
 
 !Assigning number of points
 allocate(x(n))							
-allocate(fx(n))							
+allocate(z_r(n))							
 allocate(y(n))
-allocate(fy(n))
+allocate(z_s(n))
 
 !Assign values for x and fx from the text file
 do i=1,n
@@ -42,11 +42,11 @@ call cubic_spline(y,z_s)
 write(*,*) 'x coordinates:'
 write(*,*) x
 write(*,*) 'fx coordinates:'
-write(*,*) fx
+write(*,*) z_r
 write(*,*) 'y coordinates:'
 write(*,*) y
 write(*,*) 'fy coordinates:'
-write(*,*) fy
+write(*,*) z_s
 
 end program
 
