@@ -4,16 +4,17 @@ subroutine cubic_spline(y,z_s,n)
 implicit none
 
 real 	y(n),z_s(n)						!Vectors
-real,allocatable::	h(:),r(:),b(:),c(:),d(:),a(:)				!
+real,allocatable::	h(:),r(:),b(:),c(:),d(:),a(:),c1(:)				!
 real,allocatable::	M(:,:),inv_M(:,:)								!
 integer i,j													!Things for loops
-integer n													!Number of nodes
+integer n,n1													!Number of nodes
 
 Allocate(a(n))
 Allocate(M(n-2,n-2))
 Allocate(inv_M(n-2,n-2))
 Allocate(h(n-1))
 Allocate(c(n))
+Allocate(c1(n-2))
 Allocate(b(n-1))
 Allocate(r(n-2))
 Allocate(d(n-1))
@@ -22,6 +23,7 @@ do i=1,n-1
 	h(i)=y(i+1)-y(i)
 enddo
 
+n1=n-2
 a=z_s														!Values of a are equal to those of z_s
 c(1)=0														!Boundary value zero
 c(n)=0														!Boundary value zero
@@ -38,7 +40,7 @@ enddo
 write(*,*) r
 read(*,*)
 
-M=0.0
+!M=0.0
 do i=1,n-2
 	M(i,i)=2*(h(i)+h(i+1))
 	M(i,i-1)=h(i)
@@ -48,22 +50,28 @@ enddo
 write(*,*) M
 read(*,*)
 
-call inverse_matrix(M,inv_M,n)
+call inverse_matrix(M,inv_M,n1)
 
-c=matmul(inv_M,r)
+write(*,*) inv_M
+read(*,*)
 
+c1=matmul(inv_M,r)
+do i=2,n-1
+	c(i)=c1(i-1)
+enddo
+	
 write(*,*) c
 read(*,*)
 
 do i=1,n-1
-	b(i)=(1/h(i))*(a(i+1)-a(i))-(h(i)/3)*(c(i+1)+2*c(i))
+	b(i)=((1/h(i))*(a(i+1)-a(i)))-((h(i)/3)*(c(i+1)+2*c(i)))
 enddo
 
 write(*,*) b
 read(*,*)
 
 do i=1,n-1
-	d(i)=(1/3*h(i))*(c(i+1)-c(i))
+	d(i)=(1/(3*h(i)))*(c(i+1)-c(i))
 enddo
 
 write(*,*) d
