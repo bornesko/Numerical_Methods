@@ -3,9 +3,10 @@ subroutine cubic_spline(y,z_s,n)
 
 implicit none
 
-real 	y(n),z_s(n)						!Vectors
+real 				y(n),z_s(n)						!Vectors
 real,allocatable::	h(:),r(:),b(:),c(:),d(:),a(:),c1(:)				!
-real,allocatable::	M(:,:),inv_M(:,:)								!
+real,allocatable::	M(:,:),inv_M(:,:)
+real				f_s,y0							!
 integer i,j													!Things for loops
 integer n,n1													!Number of nodes
 
@@ -77,4 +78,38 @@ enddo
 write(*,*) d
 read(*,*)
 
+!!write values from 1 to 100
+do i=-6,6
+	write(*,*) f_s(real(i))
+enddo
+read(*,*)
+
 end subroutine
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!Function f_s(y)
+real function f_s(y)
+
+implicit none
+
+real y0       						! argument of the function
+real a(n),c(n),b(n-1),d(n-1),y(n)
+integer n,z,i
+
+n=6
+! Calculation of the function value
+!**************************************************************************!
+z=1
+do while(z.le.n) !!Check later if its n, n-1,
+	if(y0.ge.y(z).and.y0.lt.y(z+1)) then
+	i=z
+	exit
+	else
+	z=z+1
+	endif
+enddo
+	
+f_s=a(i)+b(i)*(y0-y(i))+c(i)*(y0-y(i))**2+d(i)*(y0-y(i))**3
+
+end function
