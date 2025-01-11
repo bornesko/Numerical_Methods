@@ -36,6 +36,7 @@ close(10)
 
 !Call function X
 
+!Call function Y
 call cubic_spline(y,z_s,n)
 
 !Write Check for the points
@@ -50,6 +51,3 @@ call cubic_spline(y,z_s,n)
 !read(*,*)
 
 end program
-
-
-!!!
