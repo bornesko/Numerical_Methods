@@ -5,7 +5,7 @@ program main_program
 implicit none
 
 !Variables
-real, allocatable:: x(:), z_r(:), y(:), z_s(:) 	!Variables for X and fx, that should be read from a .txt file
+real, allocatable:: xu(:), z_r(:), y(:), z_s(:) 	!Variables for X and fx, that should be read from a .txt file
 integer n										!Number of Points (first line of the .txt file)
 integer i										!Loop Variable
 
@@ -14,14 +14,14 @@ read(10,*) n	!Read the size from the first line of the .txt file
 read(10,*)		!Skipping the headings "x" and "fx" in the .txt file
 
 !Assigning number of points
-allocate(x(n))							
+allocate(xu(n))							
 allocate(z_r(n))							
 allocate(y(n))
 allocate(z_s(n))
 
 !Assign values for x and fx from the text file
 do i=1,n
-	read(10,*) x(i), z_r(i)			
+	read(10,*) xu(i), z_r(i)			
 enddo
 
 read(10,*) !There is an empty space in the .txt, which should be skipped
@@ -35,7 +35,7 @@ enddo
 close(10)
 
 !Call function X
-
+call newton_interpolation(xu,z_r,n)
 !Call function Y
 call cubic_spline(y,z_s,n)
 
