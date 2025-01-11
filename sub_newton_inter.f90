@@ -76,7 +76,7 @@ end subroutine
 
 real function newton_function(x)
 
-use glob_variables_cubicspl	!the global variables are xu, C and n
+use glob_variables_cubicspl	!the global variables are x_f, C_f and p
 
 implicit none
 
