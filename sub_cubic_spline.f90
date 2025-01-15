@@ -93,22 +93,7 @@ do i=1,101														!Loop from 1 to the total number of equidistant spaces +
 	write(21,*) y0, f_s(y0)										!Print "y0" and the result of f_s( ) evaluated for that value
 enddo															!
 close(21)														!Close the results file
-																!
-read(*,*)														!Pause, wait for an input
-																!
-!!!!!!!!!!!!!! Plot points of the function f_s(y) !!!!!!!!!!!!!!*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-open(22,file='plot_cubicspl.plt')								!Open file for plot instructions
-write(22,*) 'set title "f_s(y)"'								!Title
-write(22,*) 'set xrange [-7:7]'									!X range
-write(22,*) 'set yrange [-1:3]'									!Y range
-write(22,*) 'set xlabel "y [U]"'								!X label
-write(22,*) 'set ylabel "z_s [U]"'								!Y label
-write(22,*) 'plot "data_f_s.txt"' 								!Plot command
-write(22,*) 'pause -1 "Hit ENTER to continue"'					!Pause command
-close(22)														!Close file
-																!
-call system('binary\wgnuplot plot_cubicspl.plt')				!Call wgnuplot.exe and handle over the gnuplot-input file
-																!
+																!														!
 end subroutine													!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

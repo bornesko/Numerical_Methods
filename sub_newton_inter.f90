@@ -57,19 +57,6 @@ enddo
 
 close(11)
 
-!GNUplot statements
-open(12, file='plot_newton_inter.plt')
-write(12,*) 'set title "f(x)"'
-write(12,*) 'set xrange [-6.0:6.0]'
-write(12,*) 'set yrange [-8.0:8.0]'
-write(12,*) 'set xlabel "x [Units]"'
-write(12,*) 'set ylabel "fx [Units]"'
-write(12,*) 'plot "data_f_r.txt"'
-write(12,*) 'pause -1 "Hit return to continue"'
-close(12)
-
-call system('binary\wgnuplot plot_2D.plt')
-
 end subroutine
 
 

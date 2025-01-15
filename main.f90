@@ -39,15 +39,27 @@ call newton_interpolation(xu,z_r,n)
 !Call function Y
 call cubic_spline(y,z_s,n)
 
-!Write Check for the points
-!write(*,*) 'x coordinates:'
-!write(*,*) x
-!write(*,*) 'fx coordinates:'
-!write(*,*) z_r
-!write(*,*) 'y coordinates:'
-!write(*,*) y
-!write(*,*) 'fy coordinates:'
-!write(*,*) z_s
-!read(*,*)
+! gnuplot code
+open(14,file='plot_task01.plt')
+write(14,*) 'set multiplot layout 2,1 rowsfirst'
+write(14,*) 'set label 1 ""'
+write(14,*) 'set title "Newton Interpolation"'
+write(14,*) 'set xlabel "x [U]"'								
+write(14,*) 'set ylabel "z_r [U]"'
+write(14,*) 'set xrange [',xu(1),':',xu(n),']'					!https://gnuplotting.org/tag/multiplot/index.html
+write(14,*) 'plot "data_f_r.txt"'
+write(14,*) 'set label 2 ""'
+write(14,*) 'set title "Cubic Spline"'
+write(14,*) 'set xlabel "y [U]"'
+write(14,*) 'set ylabel "z_s [U]"'
+write(14,*) 'set xrange [',y(1),':',y(n),']'								
+write(14,*) 'plot "data_f_s.txt"'
+write(14,*) 'unset multiplot'
+write(14,*) 'pause -1 "Hit return to continue"'
+
+close(14)														
+
+call system('binary\wgnuplot plot_task01.plt')
+ 
 
 end program
