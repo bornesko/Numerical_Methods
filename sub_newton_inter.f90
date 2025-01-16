@@ -46,7 +46,7 @@ p = n		!The number of given X points
 
 temp=xu(1)										!Lowest given point as a starting reference for the loop 
 
-open(11,file='data_f_r.txt')					!Create a file to store all the points that are going to be calculated x and coresponding fx
+open(11,file='task_1/data_f_r.txt')					!Create a file to store all the points that are going to be calculated x and coresponding fx
 
 !loop to gather points from the function
 do

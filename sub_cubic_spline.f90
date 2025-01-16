@@ -72,7 +72,7 @@ sp=(y(n)-y(1))/100												!Define spacing size (total range divided by some 
 sp2=y(n)														!Define top limit for spacing
 																!
 !!!!!!!!!!!!!!!!!!!!!!! Print f_s values !!!!!!!!!!!!!!!!!!!!!!!*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-open(21,file='data_f_s.txt')									!Open file to store printed values
+open(21,file='task_1/data_f_s.txt')									!Open file to store printed values
 																!
 do i=1,101														!Loop from 1 to the total number of equidistant spaces +1
 	y0=sp1+(sp*real(i-1))										!"y0" variable that will be evaluated into function f_s( ) 
