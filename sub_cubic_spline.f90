@@ -3,7 +3,7 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 subroutine cubic_spline(y,z_s,n)								!Subroutine calls "y" and "z_s" from input values, and "n" number of inputs (nodes) 
 																!
-use glob_variables_cubicspl										!Call global variables module file
+use glob_variables												!Call global variables module file
 																!
 implicit none													!
 																!
@@ -103,7 +103,7 @@ end subroutine													!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 real function f_s(y0)											!Initiate "function" program
 																!
-use glob_variables_cubicspl										!Call global variables module file
+use glob_variables												!Call global variables module file
 																!
 implicit none													!
 																!
