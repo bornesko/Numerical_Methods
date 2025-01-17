@@ -2,11 +2,13 @@
 
 program main_program
 
+use glob_variables
+
 implicit none
 
 !Variables
-real, allocatable:: x(:), z_r(:), y(:), z_s(:) 	!Variables for X and fx, that should be read from a .txt file
-integer n										!Number of Points (first line of the .txt file)
+real, allocatable::  z_r(:), z_s(:) 	!Variables for X and fx, that should be read from a .txt file
+										!Number of Points (first line of the .txt file)
 integer i										!Loop Variable
 
 open(10,file='input_points.txt')
@@ -34,10 +36,11 @@ enddo
 
 close(10)
 
+
 !Call function X
-call newton_interpolation(x,z_r,n)
+call newton_interpolation(z_r)
 !Call function Y
-call cubic_spline(y,z_s,n)
+call cubic_spline(z_s)
 
 open(11,file='task_1/x_points.txt')
 do i=1,n

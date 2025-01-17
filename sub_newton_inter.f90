@@ -1,16 +1,16 @@
-subroutine newton_interpolation(x,z_r,n)
+subroutine newton_interpolation(z_r)
 
 use glob_variables
 
 implicit none
 
-real x(n)						!Given x points
+
 real z_r(n)						!Given fx points
 real f_r						!Function to calculate the interpolation
 real temp						!Temporary value to store
 real, allocatable::	A(:,:)		!Matrix for the coefficients
 real, allocatable:: C(:)		!Coefficients from the matrix for the function
-integer n						!The number of points given 
+						!The number of points given 
 integer i, j, k					!Loop Indices
 
 !Assigning sizes
@@ -38,11 +38,10 @@ enddo
 
 !Global values needed for the function
 allocate(C_f(n))
-allocate(x_f(n))
+!allocate(x_f(n))
 
 C_f = C 	!The coefficients
-x_f = x	!The given X points
-p = n		!The number of given X points
+
 
 temp=x(1)										!Lowest given point as a starting reference for the loop 
 
@@ -75,9 +74,11 @@ temp_c = C_f(1)		!First part of the function -> Only the first coefficient. In t
 temp = 1.00			!The multiplication part (x-xu) that repeats and increases after every loop
 temp_f = 0.00		!The total part of (x-xu)*C
 
-do j=1,p	
-	temp_f = ((x0-(x_f(j)))*(C_f(j+1)))*temp + temp_f	!READ AS: (x-x1)*C2 + 0  . The first loop temp_f should be 0, because no intermediate result
-	temp = (x0-(x_f(j)))*temp							!(x-x1) becomes a temp 
+do j=1,n	
+	temp_f = ((x0-(x(j)))*(C_f(j+1)))*temp + temp_f	!READ AS: (x-x1)*C2 + 0  . The first loop temp_f should be 0, because no intermediate result
+	temp = (x0-(x(j)))*temp							!(x-x1) becomes a temp 
+!	temp_f = ((x0-(x_f(j)))*(C_f(j+1)))*temp + temp_f	!READ AS: (x-x1)*C2 + 0  . The first loop temp_f should be 0, because no intermediate result
+!	temp = (x0-(x_f(j)))*temp							!(x-x1) becomes a temp 
 enddo													!-> loop 2 is:	 (x-x2) *  C3  *   (x-x1)  +   Loop 1
 														!                (x-xu2)*  C(3) *    temp  +   temp_f 
 f_r = temp_c + temp_f						!-> loop 3 is:	 (x-x3) *  C4  *   (x-x1)*(x-x2) + 	Loop 1 + Loop 2
