@@ -16,7 +16,7 @@ length_y = y(n) - y(1)
 
 open(10,file='task_2/convergence.txt')
 
-points = 10
+points = 100
 
 do
 	f_mc = 0
@@ -29,7 +29,7 @@ do
 		f_mc = f_r(x_mc) * f_s(y_mc) + f_mc
 	enddo
 	final_f = (f_mc/points)*length_x*length_y
-	write(10,*) points, final_f
+	write(10,"(I10,F10.2)") points, final_f
 	
 	points = points*2
 	

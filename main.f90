@@ -70,7 +70,9 @@ write(14,*) 'set xlabel "y [U]"'
 write(14,*) 'set ylabel "z_s [U]"'
 write(14,*) 'set style line 2 lt rgb "#DC143C" pt 7'
 write(14,*) 'set xrange [',y(1),':',y(n),']'								
-write(14,*) 'plot "task_1/data_f_s.txt" with lines lt rgb "#00008b", "task_1/y_points.txt" with points ls 2'
+write(14,*) 'plot "task_1/data_f_s.txt" with lines lt rgb "#00008b",' // &
+			' "task_1/y_points.txt" using 1:2:(sprintf("(%g,%g)",$1,$2)) with labels offset 1,1 point ls 2'
+!write(14,*) 'plot "task_1/data_f_s.txt" with lines lt rgb "#00008b", "task_1/y_points.txt" with points ls 2'
 write(14,*) 'unset multiplot'
 write(14,*) 'pause -1 "Hit return to continue"'
 
@@ -86,7 +88,8 @@ write(10,*) 'set logscale x'
 write(10,*) 'set xlabel "Number of Points [n]"'								
 write(10,*) 'set ylabel "Integration [U^3]"'
 write(14,*) 'set style line 1 lt rgb "#DC143C" pt 7'
-write(10,*) 'plot "task_2/convergence.txt" with points, "task_2/convergence.txt" with line lt rgb "#00008b"'
+write(10,*) 'plot "task_2/convergence.txt" using 1:2:(sprintf("(%g)",$2)) with labels offset 1,1 point pt 2,' // &
+			' "task_2/convergence.txt" with line lt rgb "#00008b"'
 write(10,*) 'pause -1 "Hit return to continue"'
 
 close(10)														

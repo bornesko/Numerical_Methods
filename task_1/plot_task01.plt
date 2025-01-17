@@ -12,6 +12,6 @@
  set ylabel "z_s [U]"
  set style line 2 lt rgb "#DC143C" pt 7
  set xrange [  -6.0000000     :   6.0000000     ]
- plot "task_1/data_f_s.txt" with lines lt rgb "#00008b", "task_1/y_points.txt" with points ls 2
+ plot "task_1/data_f_s.txt" with lines lt rgb "#00008b", "task_1/y_points.txt" using 1:2:(sprintf("(%g,%g)",$1,$2)) with labels offset 1,1 point ls 2
  unset multiplot
  pause -1 "Hit return to continue"
