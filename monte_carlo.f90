@@ -16,7 +16,7 @@ length_y = y(n) - y(1)
 
 open(10,file='task_2/convergence.txt')
 
-points = 100
+points = 10
 
 do
 	f_mc = 0

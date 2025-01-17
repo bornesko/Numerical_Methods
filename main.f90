@@ -82,9 +82,11 @@ call monte_carlo
 
 open(10,file='task_2/plot_task02.plt')
 write(10,*) 'set title "Convergence"'
+write(10,*) 'set logscale x'
 write(10,*) 'set xlabel "Number of Points [n]"'								
 write(10,*) 'set ylabel "Integration [U^3]"'
-write(10,*) 'plot "task_2/convergence.txt"'
+write(14,*) 'set style line 1 lt rgb "#DC143C" pt 7'
+write(10,*) 'plot "task_2/convergence.txt" with points, "task_2/convergence.txt" with line lt rgb "#00008b"'
 write(10,*) 'pause -1 "Hit return to continue"'
 
 close(10)														
