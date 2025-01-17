@@ -1,0 +1,5 @@
+ set title "Convergence"
+ set xlabel "Number of Points [n]"
+ set ylabel "Integration [U^3]"
+ plot "task_2/convergence.txt"
+ pause -1 "Hit return to continue"

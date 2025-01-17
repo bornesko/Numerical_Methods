@@ -12,8 +12,8 @@ real, allocatable::  z_r(:), z_s(:) 	!Variables for X and fx, that should be rea
 integer i										!Loop Variable
 
 open(10,file='input_points.txt')
-read(10,*) n	!Read the size from the first line of the .txt file
-read(10,*)		!Skipping the headings "x" and "fx" in the .txt file
+read(10,*) n									!Read the size from the first line of the .txt file
+read(10,*)										!Skipping the headings "x" and "fx" in the .txt file
 
 !Assigning number of points
 allocate(x(n))							
@@ -78,5 +78,17 @@ close(14)
 
 call system('binary\wgnuplot task_1\plot_task01.plt')
  
+call monte_carlo
+
+open(10,file='task_2/plot_task02.plt')
+write(10,*) 'set title "Convergence"'
+write(10,*) 'set xlabel "Number of Points [n]"'								
+write(10,*) 'set ylabel "Integration [U^3]"'
+write(10,*) 'plot "task_2/convergence.txt"'
+write(10,*) 'pause -1 "Hit return to continue"'
+
+close(10)														
+
+call system('binary\wgnuplot task_2\plot_task02.plt')
 
 end program
