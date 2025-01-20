@@ -38,8 +38,11 @@ close(10)
 
 
 !Call function X
+
 call newton_interpolation(z_r)
+
 !Call function Y
+
 call cubic_spline(z_s)
 
 open(11,file='task_1/x_points.txt')
@@ -80,6 +83,8 @@ close(14)
 
 call system('binary\wgnuplot task_1\plot_task01.plt')
  
+!Call Monte Carlo
+
 call monte_carlo
 
 open(10,file='task_2/plot_task02.plt')
@@ -95,5 +100,9 @@ write(10,*) 'pause -1 "Hit return to continue"'
 close(10)														
 
 call system('binary\wgnuplot task_2\plot_task02.plt')
+
+!Call Bisection
+
+call bisection
 
 end program

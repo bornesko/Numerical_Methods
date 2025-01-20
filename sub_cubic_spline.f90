@@ -43,7 +43,7 @@ do i=1,n-2														!
 	M(i,i+1)=h(i+1)												!Equation for elements to the right of the diagonal
 enddo															!		
 																!
-a_cs=z_s															!"a" variable has the same values from "z_s" input (NEEDED AGAIN, NOT SURE WHY)
+a_cs=z_s 														!"a" variable has the same values from "z_s" input (NEEDED AGAIN, NOT SURE WHY)
 																!
 n1=n-2															!Definition of reduced "n1" needed for the matrices in det and inv subroutines
 																!
