@@ -1,5 +1,0 @@
- set title "fS(y)"
- set xlabel "y [LE]"
- set ylabel "z [LE]"
- plot "test.txt"
- pause -1  "Hit return to continue"
