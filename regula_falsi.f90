@@ -5,7 +5,7 @@ use glob_variables
 implicit none
 
 real				f_s
-real				temp_a,temp_b,y_new,a_rf,b_rf,temp_c
+real				temp_a,temp_b,y_new,a_rf,b_rf,temp_c,error
 real,allocatable::	y_rf(:),fs_rf(:)
 integer				iter,count
 integer				i,j,k
@@ -47,7 +47,10 @@ do k=1,count
 	a_rf=y_rf(i)
 	b_rf=y_rf(i+1)
 !	write(*,*) a_rf,b_rf
-	do j=1,10
+	error=0
+	y_new=1
+	do while ((abs(abs(error)-abs(y_new))).ge.0.00001)
+		error=y_new
 		y_new=(a_rf)-((b_rf-a_rf)/(f_s(b_rf)-f_s(a_rf)))*(f_s(a_rf))
 		if ((f_s(a_rf)*f_s(y_new)).gt.0) then
 			a_rf=y_new
@@ -58,10 +61,11 @@ do k=1,count
 		else
 			write(*,*) "error"
 		endif
-!		write(*,*) y_new
+!		write(*,*) abs(abs(error)-abs(y_new))
+!		read(*,*)
 	enddo
 
-	write(*,*) y_new, f_s(y_new)
+	write(*,*) "RF-Method roots y=", y_new, "f_s=", f_s(y_new)
 
 enddo
 close(61)

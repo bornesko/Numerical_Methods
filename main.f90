@@ -74,7 +74,7 @@ write(14,*) 'set xlabel "y [U]"'
 write(14,*) 'set ylabel "z_s [U]"'
 write(14,*) 'set style line 2 lt rgb "#DC143C" pt 7'
 write(14,*) 'set xrange [',y(1),':',y(n),']'								
-write(14,*) 'plot "task_1/data_f_s.txt" with lines lt rgb "#00008b" title "Cubic Spline ",' // &
+write(14,*) 'plot "task_1/data_f_s.txt" with line lt rgb "#00008b" title "Cubic Spline ",' // &
 			' "task_1/y_points.txt" using 1:2:(sprintf("(%g,%g)",$1,$2)) with labels offset 1,1 font ",7" point ls 2 notitle'
 !write(14,*) 'plot "task_1/data_f_s.txt" with lines lt rgb "#00008b", "task_1/y_points.txt" with points ls 2'
 write(14,*) 'unset multiplot'

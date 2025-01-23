@@ -37,13 +37,12 @@ do i=1,n-2																	!
 enddo																		!
 																			!
 M=0.0																		!Matrix M filled with zeros
-do i=1,n-2																	!
-	M(i,i)=2*(h(i)+h(i+1))													!Equation for diagonal elements of the matrix
-	M(i,i-1)=h(i)															!Equation for elements to the left of the diagonal
-	M(i,i+1)=h(i+1)															!Equation for elements to the right of the diagonal
-enddo																		!		
-																			!
-a_cs=z_s 																	!"a" variable has the same values from "z_s" input (NEEDED AGAIN, NOT SURE WHY)
+do i=1,n-3																	!
+	M(i,i)=2*(h(i)+h(i+1))													!Equation for main diagonal elements of the matrix
+	M(i,i+1)=h(i+1)															!Equation for elements of the upper diagonal
+	M(i+1,i)=h(i+1)															!Equation for elements of the lower diagonal
+enddo																		!
+M(n-2,n-2)=2*(h(n-3)+h(n-2))												!Final value of main matrix diagonal (n-2,n-2)																		!		
 																			!
 n1=n-2																		!Definition of reduced "n1" needed for the matrices in det and inv subroutines
 																			!
@@ -69,7 +68,6 @@ enddo																		!
 																			!
 sp1=y(1)																	!Define bottom limit for spacing
 sp=(y(n)-y(1))/100															!Define spacing size (total range divided by some arbitrary number)  
-sp2=y(n)																	!Define top limit for spacing
 																			!
 !!!!!!!!!!!!!!!!!!!!!!! Print f_s values !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 open(21,file='task_1/data_f_s.txt')											!Open file to store printed values
