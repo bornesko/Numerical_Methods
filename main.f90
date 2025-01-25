@@ -109,6 +109,8 @@ call system('binary\wgnuplot task_2\plot_task02.plt')
 
 call bisection
 
+call secant_method
+
 call regula_falsi
 
 end program

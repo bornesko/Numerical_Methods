@@ -6,6 +6,7 @@ gfortran module_cubicspl.f90 ^
 		 00_subroutine_det.f90 ^
 		 monte_carlo.f90 ^
 		 bisection.f90 ^
+		 secant.f90 ^
 		 regula_falsi.f90
 pause
 a.exe
