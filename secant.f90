@@ -19,9 +19,6 @@ allocate(a_sec(100))
 allocate(b_sec(100))
 allocate(y_sec(0:max_iter))	
 
-a_sec(1)=y(1)	!First value
-b_sec(0)=y(1)
-
 open(10,file='task_1/data_f_s.txt')
 do i =1,101
 	read(10,*) temp_y(i), temp_fs(i)	!Reading the results from task_1/data_f_s
