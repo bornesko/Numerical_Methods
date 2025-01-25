@@ -31,8 +31,8 @@ close(10)
 do i=1,100
 	if(temp_fs(i)/temp_fs(i+1).lt.0.00) then	!Finding a change of sign
 	roots=roots+1								!Root is present
-	a_sec(roots)=b_sec(roots-1)					!Remember the values of y
-	b_sec(roots)=temp_fs(i+1)
+	a_sec(roots)=temp_y(i)					    !Remember the values of y
+	b_sec(roots)=temp_y(i+1)
 	endif
 enddo
 
