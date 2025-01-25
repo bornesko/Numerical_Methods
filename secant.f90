@@ -34,8 +34,8 @@ do i=1,100
 enddo
 
 write(*,*) 'SECANT METHOD'
+write(*,*) '-------------'
 write(*,*) 'Expected roots:', roots
-read(*,*)
 
 do i=1, roots
 	j = 1
@@ -52,7 +52,7 @@ do i=1, roots
 		
 	enddo
 	
-	write(*,*) 'Root:', y_sec(j), 0.00, 'Iterations:', j
+	write(*,*) 'y=', y_sec(j), 'f_s=', 0.00, 'Iterations:',j
 	
 enddo
 

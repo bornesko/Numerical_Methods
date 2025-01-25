@@ -64,6 +64,8 @@ write(14,*) 'set label 1 ""'
 write(14,*) 'set title "Newton Interpolation"'
 write(14,*) 'set xlabel "x [U]"'								
 write(14,*) 'set ylabel "z_r [U]"'
+write(14,*) 'set xzeroaxis'
+write(14,*) 'set yzeroaxis'
 write(14,*) 'set style line 1 lt rgb "#DC143C" pt 7'
 write(14,*) 'set xrange [',x(1),':',x(n),']'					!https://gnuplotting.org/tag/multiplot/index.html
 write(14,*) 'plot "task_1/data_f_r.txt" with line lt rgb "#00008b" title "Newton Interpolation ",' // & 
@@ -72,6 +74,8 @@ write(14,*) 'set label 2 ""'
 write(14,*) 'set title "Cubic Spline"'
 write(14,*) 'set xlabel "y [U]"'
 write(14,*) 'set ylabel "z_s [U]"'
+write(14,*) 'set xzeroaxis'
+write(14,*) 'set yzeroaxis'
 write(14,*) 'set style line 2 lt rgb "#DC143C" pt 7'
 write(14,*) 'set xrange [',y(1),':',y(n),']'								
 write(14,*) 'plot "task_1/data_f_s.txt" with line lt rgb "#00008b" title "Cubic Spline ",' // &
