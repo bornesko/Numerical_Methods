@@ -11,10 +11,9 @@ real, allocatable::  z_r(:), z_s(:) 	!Variables for X and fx, that should be rea
 integer i, j							!Loop Variable
 real temp_1, temp_2						!Temporary values for the ordering loop
 real,allocatable:: temp_y(:), temp_fs(:) !Temporary values for root finder
-integer roots							!Number of roots for root finder
+
 
 ! Assigning Plot points
-
 plot_points=100
 
 open(10,file='input_points.txt')
@@ -71,8 +70,8 @@ do i=1,n
 enddo			
 
 !Call function X
-write(*,*) y, z_s
-read(*,*)
+!write(*,*) y, z_s
+!read(*,*)
 
 call newton_interpolation(z_r)
 
@@ -158,6 +157,7 @@ enddo
 close(10)
 
 roots=0
+error_root= 0.01
 
 do i=1,plot_points
 	if(temp_fs(i)*temp_fs(i+1).le.0.00) then	!Finding a change of sign
@@ -167,10 +167,11 @@ do i=1,plot_points
 	endif
 enddo
 
+
 call bisection
 
 call secant_method
 
-call regula_falsi
+!call regula_falsi
 
 end program

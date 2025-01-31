@@ -16,5 +16,7 @@ integer n
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 real,allocatable:: a_root(:),b_root(:)
+real 			   error_root
+integer 		   roots
 
 end module glob_variables
