@@ -8,8 +8,8 @@ implicit none
 
 !Variables
 real, allocatable::  z_r(:), z_s(:) 	!Variables for X and fx, that should be read from a .txt file
-										!Number of Points (first line of the .txt file)
-integer i										!Loop Variable
+integer i, j							!Loop Variable
+real temp_1, temp_2						!Temporary values for the ordering loop
 
 open(10,file='input_points.txt')
 read(10,*) n									!Read the size from the first line of the .txt file
@@ -36,8 +36,37 @@ enddo
 
 close(10)
 
+!Loop to order values from lowest to biggest -> X and Z_R
+do i=1,n
+	do j=1,n
+		if(x(i).lt.x(j)) then
+			temp_1 = x(j)
+			temp_2 = z_r(j) 
+			x(j) = x(i)
+			z_r(j) = z_r(i)
+			x(i) = temp_1
+			z_r(i) = temp_2
+		endif
+	enddo
+enddo
+
+!Loop to order values from lowest to biggest -> Y and Z_S
+do i=1,n
+	do j=1,n
+		if(y(i).lt.y(j)) then
+			temp_1 = y(j)
+			temp_2 = z_s(j) 
+			y(j) = y(i)
+			z_s(j) = z_s(i)
+			y(i) = temp_1
+			z_s(i) = temp_2
+		endif
+	enddo
+enddo			
 
 !Call function X
+write(*,*) y, z_s
+read(*,*)
 
 call newton_interpolation(z_r)
 
@@ -110,7 +139,6 @@ close(10)
 call system('binary\wgnuplot task_2\plot_task02.plt')
 
 !Call Bisection
-
 call bisection
 
 call secant_method
