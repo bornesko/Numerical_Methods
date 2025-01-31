@@ -43,15 +43,13 @@ allocate(C_f(n))
 C_f = C 	!The coefficients
 
 
-temp=x(1)										!Lowest given point as a starting reference for the loop 
 
 open(11,file='task_1/data_f_r.txt')					!Create a file to store all the points that are going to be calculated x and coresponding fx
 
 !loop to gather points from the function
-do
-	write(11,*) temp, f_r(temp)		!Start from the lowest x = xu(1) = temp and write the x and the fx (newton result)
-	temp=temp+0.1								!With and increment of 0.1
-	if(temp.gt.x(n))exit						!And stop when x(n) is reached
+do i=1, plot_points + 1
+	temp = x(1) + (((x(n)-x(1))/100)*real(i-1))
+	write(11,*) temp, f_r(temp)		
 enddo
 
 close(11)
