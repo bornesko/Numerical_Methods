@@ -10,6 +10,12 @@ implicit none
 real, allocatable::  z_r(:), z_s(:) 	!Variables for X and fx, that should be read from a .txt file
 integer i, j							!Loop Variable
 real temp_1, temp_2						!Temporary values for the ordering loop
+real,allocatable:: temp_y(:), temp_fs(:) !Temporary values for root finder
+integer roots							!Number of roots for root finder
+
+! Assigning Plot points
+
+plot_points=100
 
 open(10,file='input_points.txt')
 read(10,*) n									!Read the size from the first line of the .txt file
@@ -139,6 +145,28 @@ close(10)
 call system('binary\wgnuplot task_2\plot_task02.plt')
 
 !Call Bisection
+
+allocate(temp_y(plot_points+1))	!Assigning size
+allocate(temp_fs(plot_points+1)) 
+allocate(a_root(plot_points))
+allocate(b_root(plot_points))
+
+open(10,file='task_1/data_f_s.txt')
+do i =1,plot_points+1
+	read(10,*) temp_y(i), temp_fs(i)	!Reading the results from task_1/data_f_s
+enddo
+close(10)
+
+roots=0
+
+do i=1,plot_points
+	if(temp_fs(i)*temp_fs(i+1).le.0.00) then	!Finding a change of sign
+	roots=roots+1								!Root is present
+	a_root(roots)=temp_y(i)					    !Remember the values of y
+	b_root(roots)=temp_y(i+1)
+	endif
+enddo
+
 call bisection
 
 call secant_method
