@@ -172,6 +172,6 @@ call bisection
 
 call secant_method
 
-!call regula_falsi
+call regula_falsi
 
 end program

@@ -5,71 +5,36 @@ use glob_variables
 implicit none
 
 real				f_s
-real				temp_a,temp_b,y_new,a_rf,b_rf,temp_c,error
-real,allocatable::	y_rf(:),fs_rf(:)
-integer				iter,count
-integer				i,j,k
+real				temp,y_rf,a_rt,b_rt
+real,allocatable::	temp_y(:),temp_fs(:)
+integer				i,j,max_iter
 
-iter=101 !Value coming from the total number of simulated points in cubic_spline
+max_iter=1000						!
 
-Allocate(y_rf(iter))
-Allocate(fs_rf(iter))
-
-open(60,file='task_1/data_f_s.txt')
-do i=1,101
-	read(60,*) y_rf(i),fs_rf(i)
-enddo
-close(60)
-
-count=0
-open(61,file='task_3/potential_roots.txt')
-do i=1,iter-2
-	temp_a=(fs_rf(i))/abs(fs_rf(i))
-	temp_b=(fs_rf(i+1))/abs(fs_rf(i+1))
-
-!	temp_a=(fs_rf(i+1)-fs_rf(i))/abs(fs_rf(i+1)-fs_rf(i))
-!	temp_b=(fs_rf(i+2)-fs_rf(i+1))/abs(fs_rf(i+2)-fs_rf(i+1))
-!	write(*,*) temp_a,temp_b
-!	read(*,*)
-	if (temp_a.ne.temp_b) then
-	write(61,*) i
-	count=1+count
-!	else !stalled
-!	write(*,*) "no roots"
-	endif
-enddo
-close(61)
-
-open(61,file='task_3/potential_roots.txt')
-
-do k=1,count
-	read(61,*) i
-	a_rf=y_rf(i)
-	b_rf=y_rf(i+1)
-!	write(*,*) a_rf,b_rf
-	error=0
-	y_new=1
-	do while ((abs(abs(error)-abs(y_new))).ge.0.00001)
-		error=y_new
-		y_new=(a_rf)-((b_rf-a_rf)/(f_s(b_rf)-f_s(a_rf)))*(f_s(a_rf))
-		if ((f_s(a_rf)*f_s(y_new)).gt.0) then
-			a_rf=y_new
-			b_rf=b_rf
-		else if ((f_s(b_rf)*f_s(y_new)).gt.0) then
-			a_rf=a_rf
-			b_rf=y_new
+open(61,file='task_3/03_regula_falsi_roots.txt')
+do i=1,roots
+	j=1
+	temp=1
+	a_rt=a_root(i)
+	b_rt=b_root(i)
+	do while (abs(temp).gt.error_root.and.j.lt.max_iter)
+		y_rf=(a_rt)-((b_rt-a_rt)/(f_s(b_rt)-f_s(a_rt)))*(f_s(a_rt))
+		if ((f_s(a_rt)*f_s(y_rf)).gt.0) then
+			a_rt=y_rf
+			b_rt=b_rt
+		else if ((f_s(b_rt)*f_s(y_rf)).gt.0) then
+			a_rt=a_rt
+			b_rt=y_rf
 		else
-			write(*,*) "error"
+			write(61,*) "error"
 		endif
-!		write(*,*) abs(abs(error)-abs(y_new))
-!		read(*,*)
+	j=j+1
+	temp=f_s(y_rf)
 	enddo
 
-	write(*,*) "RF-Method roots y=", y_new, "f_s=", f_s(y_new)
+	write(61,*) "y=", y_rf, "f_s=", f_s(y_rf), "Iterations =", j
 
 enddo
 close(61)
-
-read(*,*)
 
 end subroutine
