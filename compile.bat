@@ -1,4 +1,4 @@
-gfortran module_cubicspl.f90 ^
+gfortran module.f90 ^
 		 main.f90 ^
 		 sub_newton_inter.f90 ^
 		 sub_cubic_spline.f90 ^

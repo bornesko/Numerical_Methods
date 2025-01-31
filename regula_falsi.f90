@@ -32,7 +32,7 @@ do i=1,roots
 	temp=f_s(y_rf)
 	enddo
 
-	write(61,*) "y=", y_rf, "f_s=", f_s(y_rf), "Iterations =", j
+	write(61,*) y_rf, f_s(y_rf), j
 
 enddo
 close(61)
