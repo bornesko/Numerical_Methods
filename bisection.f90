@@ -1,60 +1,65 @@
-subroutine bisection_method
-    
-use glob_variables
-    
+subroutine bisection
+
+use glob_variables	
+
 implicit none
-    
-integer iteration, index, max_iterations
-real tolerance, left_bound, right_bound, midpoint
-real f_left, f_right, f_mid
-real f_function
 
-! Define the tolerance level (error threshold)
-tolerance = 0.01
+integer i,j
+real error
+real a_bi,b_bi,t_bi,mult
+real fa_bi,fb_bi,ft_bi,f_s
 
-! Define a maximum number of iterations to prevent infinite loops
-max_iterations = 1000  
+error=0.01
 
-iteration = 0
+open(10,file='task_3/roots.txt')
 
-! Loop through each pair of consecutive values in the array y
-do index = 1, n-1
-    ! Check if there is a root in the interval [y(index), y(index+1)]
-    if (f_function(y(index)) * f_function(y(index+1)) .lt. 0) then
-    ! Set initial boundary values
-    left_bound = y(index)
-    right_bound = y(index+1)
-    f_left = f_function(left_bound)
-    f_right = f_function(right_bound)
+do j=1,n-1 
+	mult = f_s(y(j))*f_s(y(j+1))
 
-    ! Initialize midpoint function value with a large number
-        f_mid = tolerance + 1  
-
-        ! Start the Bisection method loop
-        do while (abs(f_mid) .gt. tolerance .and. iteration .lt. max_iterations)
-        ! Compute the midpoint of the current interval
-        midpoint = (left_bound + right_bound) / 2
-        f_mid = f_function(midpoint)  ! Evaluate function at the midpoint
-
-        ! Update the interval based on function signs
-        if (f_left * f_mid .gt. 0) then
-            left_bound = midpoint
-            f_left = f_mid
-        else
-            right_bound = midpoint
-            f_right = f_mid
-        endif
-
-                iteration = iteration + 1
-        enddo
-
-            ! Print the root and the number of iterations
-        write(*,*) "Root found at:", midpoint
-        write(*,*) "Iterations:", iteration
-    else
-            ! If no root is found in the interval, display a message
-        write(*,*) "No root between:", y(index), y(index+1)
-    endif
+if (mult.le.0.0) then  !checks every interval to see if there is a change of sign
+	i=0
+	a_bi=y(j)
+	b_bi=y(j+1)
+	fa_bi = f_s(a_bi)
+	fb_bi = f_s(b_bi)
+	ft_bi=error+1
+	
+	if(fa_bi.eq.0) then !checks if f_s(y(i)) is not a root
+		write(10,*) fa_bi,f_s(fa_bi),i
+	
+	else if(fb_bi.eq.0) then
+		write(10,*) fb_bi,f_s(fb_bi),i
+	
+	else 
+		do while(abs(ft_bi).gt.error)
+			
+				t_bi=(a_bi+b_bi)/2
+				ft_bi=f_s(t_bi)
+				if(fa_bi*ft_bi.gt.0) then !defines next a and b from testing if there was a change of sign
+					a_bi=t_bi
+					fa_bi=ft_bi
+				else
+					b_bi=t_bi
+					fb_bi=ft_bi
+					
+				endif
+				
+				i=i+1
+		enddo
+		write(10,*) (a_bi+b_bi)/2,f_s((a_bi+b_bi)/2),i   !once a root is found, it writes in the file the y value, 
+														!z value (for verification, can be deleted in final version), 					
+														!and how many iterations			
+	endif
+	else !added this for testing, to be deleted in final version
+	!write(*,*) 'no root between:', y(j),y(j+1) 
+endif
+	
 enddo
 
-end subroutine bisection_method
+close(10)
+
+
+
+
+end subroutine
+		
