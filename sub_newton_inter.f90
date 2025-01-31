@@ -10,7 +10,6 @@ real f_r						!Function to calculate the interpolation
 real temp						!Temporary value to store
 real, allocatable::	A(:,:)		!Matrix for the coefficients
 real, allocatable:: C(:)		!Coefficients from the matrix for the function
-						!The number of points given 
 integer i, j, k					!Loop Indices
 
 !Assigning sizes
@@ -38,11 +37,8 @@ enddo
 
 !Global values needed for the function
 allocate(C_f(n))
-!allocate(x_f(n))
 
 C_f = C 	!The coefficients
-
-
 
 open(11,file='task_1/data_f_r.txt')					!Create a file to store all the points that are going to be calculated x and coresponding fx
 
